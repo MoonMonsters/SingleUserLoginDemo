@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 跨域设置
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -127,3 +129,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 重点，设置信任站点
+if DEBUG:
+    CORS_ORIGIN_ALLOW_ALL = True
+else:
+    CORS_ORIGIN_WHITELIST = (
+        'www.example.com',
+    )
+
+import datetime
+
+JWT_AUTH = {
+    # Token失效时间
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # Token前缀
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
+    # 不允许刷新token
+    'JWT_ALLOW_REFRESH': False,
+}

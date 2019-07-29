@@ -9,9 +9,9 @@ from demo.utils.cache import cache_get_user_token
 
 
 class UserTokenAuthentication(JSONWebTokenAuthentication):
-
     def authenticate(self, request):
         # 获取返回值(user, token)
+        # 调用父类的方法解密token，并获取User对象和token值
         user_auth_tuple = super().authenticate(request)
 
         # 如果返回值为空，则说明验证失败

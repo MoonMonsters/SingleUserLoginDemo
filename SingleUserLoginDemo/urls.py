@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from rest_framework_jwt.views import refresh_jwt_token
 
 from demo import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', views.LoginView.as_view()),
-    url(r'^book/', views.BookView.as_view())
+    url(r'^book/', views.BookView.as_view()),
+    url(r'^api-token-refresh/', refresh_jwt_token),
 ]
